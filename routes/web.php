@@ -15,10 +15,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// get login page
+	
+Route::get('/home', function(){
+
+return view('welcome');
+} )->middleware('login');
+
+Route::post('/login/home', 'Users@login_post');
+Route::post('/register/home' ,'Users@insert_data');
+
+
+
+
 Route::get('login', 'Users@login_get');
-Route::post('login', 'Users@login_post')->name('users.postLogin');
+
+Route::get('/reset', 'Users@reset' );
+
 
 Route::get('/reg', 'Users@register');
-Route::post('/test' ,'Users@insert_data');
 

@@ -17,10 +17,23 @@ class Users extends Controller
     	$email = $request->email;
         $password = $request->password;
 
-        $validation = valdiator($request->all(), [
-            'email' => 'email|unique:users',
-            'password' => 'requried|string|nullable '
+        $validation = validator($request->all(), [
+            'email' => 'email',
+            'password' => 'required|string',
         ]);
+
+
+
+        if ($validation->fails()) {
+            
+            return back()->withInput($request->all())->withErrors($validation);
+        }
+
+     
+
+
+
+
 
         $user = User::where('email', $email)->first();
 
@@ -42,7 +55,7 @@ class Users extends Controller
     	
     }
 
-
+//////////////////////////////////////////////////////////////// /register
 
     public function register(){
 
@@ -57,6 +70,7 @@ class Users extends Controller
             'password'=>'required|confirmed',
             'name' => 'required',
             'email' => 'required|unique:users',
+            'phone' => 'required',
         ]);
 
         if ($validation->fails()) {
@@ -73,6 +87,7 @@ class Users extends Controller
         ]);
 
         auth()->login($user);
+        return view('welcome');
 
 
         // $add = new User;
@@ -83,5 +98,12 @@ class Users extends Controller
         // $add->save();
       
         
+    }
+
+
+
+
+    public function reset(){
+        return view('reset');
     }
 }

@@ -20,14 +20,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--Google Fonts-->
 </head>
 <body>
-<form method="post" action= "{{route('users.postLogin')}}">    
+<form method="post" action= "{{url('/login/home')}}">    
     <div class="login">
         <h2>Wa<span class="zz">ZZ</span>afny &weierp;</h2>
         <div class="login-top">
             <h1>LOGIN FORM</h1>
                 
-                <input type="text" value="email" name="email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'email';}">
-                <input type="password" value="password" name="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}">
+                <input type="text" name="email" placeholder="Email">
+
+                @if($errors->any())
+                <span style="color: red; margin-left: 5%;">{{$errors->first('email')}}</span>
+                @endif
+                <input type="password" name="password" placeholder="Password">
+
+                @if($errors->any())
+                <span style="color: red; margin-left: 5%;">{{$errors->first('password')}}</span>
+                @endif
+
+
+
+
             </form>
             <div class="forgot">
                 <a href="{{URL('/reset')}}">forgot Password</a>

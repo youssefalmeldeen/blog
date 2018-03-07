@@ -24,17 +24,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<h2>Wa<span class="zz">ZZ</span>afny &weierp;</h2>
 	<div class="login-top">
 		<h1>Register FORM</h1>
-		<form method="post" action="{{url('/test')}}">
+		<form method="post" action="{{url('/register/home')}}">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<input type="text" name="name" placeholder="Username" value="{{old('name')}}">
-			@if($errors->has('name'))
+			<input  type="text" name="name" placeholder="Username" value="{{old('name')}}">
+			@if($errors->any())
 			<span style="color: red; margin-left: 5%;">{{$errors->first('name')}}</span>
 			@endif
             <input type="text" name="email" placeholder="Email">
+            @if($errors->any())
+			<span style="color: red; margin-left: 5%;">{{$errors->first('email')}}</span>
+			@endif
             <input type="text" name="phone" placeholder="Phone">
+            @if($errors->any())
+			<span style="color: red; margin-left: 5%;">{{$errors->first('phone')}}</span>
+			@endif
             <input type="password" name="password" placeholder="Password">
+            @if($errors->any())
+			<span style="color: red; margin-left: 5%;">{{$errors->first('password')}}</span>
+			@endif
 			<input type="password" name="password_confirmation" placeholder="Confirm Password">
-			
+
 	    
 		    <div class="forgot">
 		    	<input type="submit" value="Register" >
